@@ -1,0 +1,29 @@
+#!/bin/sh
+
+cat <<EOF
+  ┌──────────────────────────────────────────────────────────────────────────────┐
+  │  Displaying content of generated Debian packages.                            │
+  └──────────────────────────────────────────────────────────────────────────────┘
+EOF
+
+if ! which debc >/dev/null 2>&1 ; then
+  echo "Error: debc executable not available, please install the devscripts Debian package." >&2
+  exit 1
+fi
+
+CHANGES=$(find . -maxdepth 1 -name \*.changes ! -name \*_source.changes)
+
+HOST_ARCH="$(dpkg-architecture -qDEB_HOST_ARCH)"
+if [ -n "${HOST_ARCH}" ] &&  [ -n "${architecture}" ] && [ "${architecture}" != "${HOST_ARCH}" ] ; then
+  arch="-a ${architecture}"
+fi
+
+if [ -n "$CHANGES" ] >/dev/null 2>&1 ; then
+  for file in $CHANGES ; do
+    debc ${arch} "$file"
+  done
+elif ls ./*.deb >/dev/null 2>&1 ; then
+  debc ${arch} ./*.deb
+else
+  echo "No changes and deb files found in $(pwd), ignoring."
+fi

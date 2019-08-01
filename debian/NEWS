@@ -1,0 +1,37 @@
+jenkins-debian-glue (0.14.0) unstable; urgency=medium
+
+  To reduce the amount of Debian binary packages we decided to
+  minimize the number of packages we ship via jenkins-debian-glue.
+  This means that the packages named
+  jenkins-debian-glue-buildenv-git,
+  jenkins-debian-glue-buildenv-svn,
+  jenkins-debian-glue-buildenv-slave,
+  jenkins-debian-glue-buildenv-lintian,
+  jenkins-debian-glue-buildenv-taptools and
+  jenkins-debian-glue-buildenv-piuparts are deprecated now.
+  To get all the scripts just the jenkins-debian-glue package is
+  needed. To install all the Debian packages that might be needed
+  to be useful with all the scripts the
+  jenkins-debian-glue-buildenv package can be used. If you don't
+  want to install all the packages which are listed in
+  jenkins-debian-glue-buildenv's Depends/Recommends you're
+  encouraged to create your own metapackage or use the
+  configuration management system of your choice.
+
+ -- Michael Prokop <mika@grml.org>  Sat, 22 Aug 2015 12:26:59 +0200
+
+jenkins-debian-glue (0.6.0) unstable; urgency=low
+
+  The timestamp format used in automatically generated version
+  strings changed.
+
+  Until and including version 0.5.0 jenkins-debian-glue's
+  generate-git-snapshot and generate-svn-snapshot scripts used
+  "seconds since 1970-01-01 00:00:00 UTC" inside the version
+  string.  The new timestamp format YYYYMMDDhhmmss (in UTC) sorts
+  equally well as unix timestamp and yet it is much more usable
+  for human beings. As this timestamp change still increases the
+  version numbers the change does NOT break any existing setups,
+  but to avoid confusion it's worth noting.
+
+ -- Michael Prokop <mika@grml.org>  Mon, 10 Jun 2013 23:38:45 +0200
